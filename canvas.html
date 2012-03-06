@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>bootstrap testing</title>
+
+		<!-- jQuery **just in case -->
+	<script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
+	<script src="includes/js/jQuery.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  	
+<link rel="stylesheet/less" type="text/css" href="includes/less/styles.less">
+<script src="includes/js/less-1.2.1.min.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="includes/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="includes/css/fb-buttons.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="includes/css/jquery.svg.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="includes/css/slide.css" type="text/css" media="screen" />
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="includes/css/extras.css" type="text/css">
+
+	<script type="text/javascript" src="includes/js/jquery.svg.js"></script>
+	<script type="text/javascript" src="includes/js/svg.js"></script>
+
+	<script type="text/javascript" src="includes/js/canvas_build.js"></script>
+	<script type="text/javascript" src="includes/js/canvas_tools.js"></script>
+	<script type="text/javascript" src="includes/js/canvas_interactions.js"></script>
+	<script type="text/javascript" src="includes/js/jquery.event.drag-1.5.min.js"></script>
+	<script type="text/javascript" src="includes/js/slide.js"></script>
+		<!-- Raphael -->
+    <script type="text/javascript" src="includes/js/raphael-min.js"></script>
+    <script type="text/javascript" src="includes/js/raphael.draggable.js"></script>
+    <script type="text/javascript" src="includes/js/raphael.sketchpad.js"></script>
+		<!-- json -->
+	<script type="text/javascript" src="includes/js/json2.min.js"></script>
+
+<!-- LINKS
+	http://ianli.com/sketchpad
+	http://raphaeljs.com
+	http://return-true.com/2010/04/jquery-pop-up-footer-version-2
+	
+	
+	  -->
+</head>
+<body>
+	
+  <noscript>mythoughtjot requires JavaScript to be enabled in your browser to work properly.</noscript>
+  
+   <div class="tipBox"></div>
+   
+	<div id="header">
+		<script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+	</script>
+	
+<!-- Panel -->
+<div id="toppanel">
+		<div id="panel">
+	
+	<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Search</a></li>
+		<li><a href="#tabs-2">Messages</a></li>
+		<li><a href="#tabs-2">Share</a></li>
+		<li><a href="#tabs-3">Settings</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p><input type="text" value="Type in your question or keywords and press enter"/></p>
+	</div>
+	<div id="tabs-2">
+		<p>content</p>
+		</div>
+	<div id="tabs-3">
+		<p>content</p>
+		</div>
+</div>
+	
+</div> <!-- /login -->	
+	<!-- The tab on top -->	
+	<div class="tab">
+		<ul class="login">
+			<li id="toggle">
+				<a id="open" class="uibutton" href="#">Open</a>	
+				<a id="close" style="display: none;" class="uibutton" href="#">Close</a>			
+			</li>
+		</ul> 
+	</div> <!-- / top -->
+</div> <!--panel -->
+
+		<div id="topMenuButtons">
+			<ul class="uibutton-group">
+			    <li><a class="uibutton" href="#">Dashboard</a></li>
+			    <li><a class="uibutton" href="#">Account</a></li>
+			    <li><a class="uibutton" href="#">Logout</a></li>
+			</ul>
+		</div>
+	</div> <!-- end header-->
+	
+<div id="canvas">
+	
+
+	<!--
+    <script type="text/javascript">
+        //variables we'll need throughout the sample code
+        var workspace;
+        var groups = [];     //just an array of the sets we create.
+    
+        //Stuff to do when the page is done loading
+        $(document).ready( function () {
+            redraw();
+        });
+
+        //The routine to repaint the drawing area
+        function redraw() {
+            workspace = Raphael('workspace', "100%", "80%");
+
+            //Add a rectangle
+            var rect = workspace.rect(0,0, 150, 100, 3);
+            rect.attr({
+                "stroke": "#00f",
+                "stroke-width": 2,
+                "fill" : "#fff"
+            });
+
+            var txt =  workspace.text(75, 50, "Drag/Drop\nExample");
+            txt.attr({
+                "width" : 150,
+                "fill": "#000",
+                "font-size": "12pt",
+                "font-weight": "bold"
+            });
+
+            //Create a set so we can move the
+            //text and rectangle at the same time
+            var g = workspace.set(rect, txt);
+            
+            //store the next index in our groups array
+            //so we can easily find the set later
+            //then add the set to the groups array
+            rect.idx = groups.length;  
+            groups.push(g);
+
+            //set up drag/drop
+            // - This could be applied to the set as well, but the "dragged"
+            //   object ends up being the rect anyways.
+            rect.drag(dragMove, dragStart, dragStop);
+        }
+
+        //set up our object for dragging
+        function dragStart() {
+            var g = null;
+            if (!isNaN(this.idx)) {
+                //find the set (if possible)
+                var g = groups[this.idx];
+            }
+            if (g) {
+                var i;
+                //store the starting point for each item in the set
+                for(i=0; i < g.items.length; i++) {
+                    g.items[i].ox = g.items[i].attr("x");
+                    g.items[i].oy = g.items[i].attr("y");
+                }
+            }
+        }
+
+        //clean up after dragging
+        function dragStop() {
+            var g = null;
+            if (!isNaN(this.idx)) {
+                //find the set (if possible)
+                var g = groups[this.idx];
+            }
+            if (g) {
+                var i;
+                //remove the starting point for each of the objects
+                for(i=0; i < g.items.length; i++) {
+                    delete(g.items[i].ox);
+                    delete(g.items[i].oy);
+                }
+            }
+        }
+
+        //take care of moving the objects when dragging
+        function dragMove(dx, dy) {
+            if (!isNaN(this.idx)) {
+                var g = groups[this.idx];
+            }
+
+            if (g) {
+                var x;
+                //reposition the objects relative to their start position
+                for(x = 0; x < g.items.length; x++) {
+                    var obj = g.items[x];   //shorthand
+                    obj.attr({ x: obj.ox + dx, y: obj.oy + dy });
+
+                //optional:  We can do a check here to see what property
+                //           we should be changing.
+                // i.e. (haven't fully tested this yet):
+                // switch (obj.type) {
+                //     case "rect":
+                //     case "text":
+                //         obj.attr({ x: obj.ox + dx, y: obj.oy + dy });
+                //         break;
+                //     case "circle":
+                //         obj.attr({ cx: obj.ox + dx, cy: obj.oy + dy });
+                // }
+                }
+            }
+        }
+    </script>
+<div id="workspace" style="width: 100%; height: 100%;"></div>
+
+-->
+	<div id="drawingTools">
+		<a href="#" class="close">x</a>
+		<h3>Drawing Tools</h3>
+		<button class="uibutton special" id="new" type="submit">New</button>
+		<button class="uibutton special" id="editor_undo" type="submit">Undo</button>
+		<button class="uibutton special" id="editor_redo" type="submit">Redo</button>
+		<button class="uibutton special" id="editor_clear" type="submit">Clear</button>
+		<button class="uibutton special" id="editor_animate" type="submit">Animate</button>
+		<button class="uibutton special" id="editor_move" type="submit">Move</button>
+		<button class="uibutton speical" id="editor_delete" type="submit">Delete</button>
+	<ul>
+		<li><a ref="#" style="background:#FFFFFF;" id="cpTile" class="white"></a></li>
+		<li><a ref="#" style="background:#dddddd;" id="cpTile" class="grey"></a></li>
+		<li><a ref="#" style="background:#000000;" id="cpTile" class="black"></a></li>
+		<li><a ref="#" style="background:#FF0000;" id="cpTile" class="red"></a></li>
+		<li><a ref="#" style="background:#1A356E;" id="cpTile" class="blue"></a></li>
+		<li><a ref="#" style="background:#63d5f1;" id="cpTile" class="lightblue"></a></li>
+		<li><a ref="#" style="background:#21b639;" id="cpTile" class="green"></a></li>
+	</ul>
+	<ul>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="white"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="grey"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="black"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="red"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="blue"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="lightblue"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="green"></a></li>
+	</ul>
+	<ul>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="white"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="grey"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="black"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="red"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="blue"></a></li>
+		<li><a ref="#" style="background:#EEE;" id="cpTile" class="lightblue"></a></li>
+		<li><a ref="#" style="background:#FFF;" id="cpTile" class="green"></a></li>
+	</ul>
+	
+	</div>
+	<div id="textTools"><a class="close">x</a>
+		<h3>Text Tools</h3>
+		<button class="uibutton special" id="nttitle" type="submit">Title</button><br>
+		<button class="uibutton special" id="ntlabel" type="submit">Label</button><br>
+		<button class="uibutton special" id="ntparagraph" type="submit">Paragraph</button>
+		</div>
+		
+	<div id="shapeTools"><a class="close">x</a>
+		<h3>Shape Tools</h3>
+		<button class="uibutton special" id="new" type="submit">New</button>
+		</div>
+		
+	<div id="graphTools"><a class="close">x</a>
+		<h3>Graph Tools</h3>
+		<button class="uibutton special" id="new" type="submit">New</button></div>
+		
+</div>  <!-- end canvas -->
+
+<script type="text/javascript">
+//side toolpanel
+$(document).ready(function(){
+	$(".trigger").click(function(){
+		$(".panel").toggle("fast");
+		$(this).toggleClass("active");
+		return false;
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	//open tool menus upon click
+	$('#drawButton').click(function() {
+		$("#textTools").fadeOut("slow");
+		$("#shapeTools").fadeOut("slow");
+		$("#graphTools").fadeOut("slow");
+		$("#drawingTools").fadeIn("slow");
+		$("#drawingTools").draggable({ containment: "body" });
+	});
+	$('#textButton').click(function() {
+		$("#drawingTools").fadeOut("slow");
+		$("#shapeTools").fadeOut("slow");
+		$("#graphTools").fadeOut("slow");
+		$("#textTools").fadeIn("slow");
+		$("#textTools").draggable({ containment: "body" });
+	});
+	$('#shapeButton').click(function() {
+		$("#drawingTools").fadeOut("slow");
+		$("#textTools").fadeOut("slow");
+		$("#graphTools").fadeOut("slow");
+		$("#shapeTools").fadeIn("slow");
+		$("#shapeTools").draggable({ containment: "body" });
+	});
+	$('#graphButton').click(function() {
+		$("#drawingTools").fadeOut("slow");
+		$("#textTools").fadeOut("slow");
+		$("#shapeTools").fadeOut("slow");
+		$("#graphTools").fadeIn("slow");
+		$("#graphTools").draggable({ containment: "body" });
+	});
+	
+	//close tool menus
+	$("#drawingTools .close").click(function () {
+		$("#drawingTools").fadeOut("slow");
+	});
+	
+	$("#drawingTools #new").click(function () {
+		draw();
+	});
+	$("#nttitle").mousedown(function(e) {
+			newtitle();
+		});
+	$("#ntlabel").mousedown(function(e) {
+			newlabel();
+		});
+	$("#ntparagraph").mousedown(function(e) {
+			newparagraph();
+	});
+
+});
+</script>
+
+<div class="panel">
+            <div id='buttons'>
+            	
+                <ul>
+                	<li onclick="redo('pencil');"><div class="buttons" id="drawButton"><script type="text/javascript">renderIcon("pencil");</script></div></li>
+                    <li onclick="redo('bubble');"><div class="buttons" id="textButton"><script type="text/javascript">renderIcon("bubble");</script></div></li>
+                    <li onclick="redo('flipv');"><div class="buttons" id="shapeButton"><script type="text/javascript">renderIcon("flipv");</script></div></li>
+                    <li onclick="redo('barchart');"><div class="buttons" id="graphButton"><script type="text/javascript">renderIcon("barchart");</script></div></li>
+     
+                </ul>
+            
+        </div>
+</div>
+<div style="clear:both;"></div>
+
+</div>
+<a class="trigger">+</a>
+
+
+
+</body>
+</html>

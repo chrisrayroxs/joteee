@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Graphs</title>
+		<!-- jQuery **just in case -->	
+	<script src="../includes/js/jQuery.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+	<link rel="stylesheet" href="../includes/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="../includes/css/fb-buttons.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../includes/css/jquery.svg.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../includes/css/slide.css" type="text/css" media="screen" />
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="../includes/css/styles.css" type="text/css">
+
+	<script type="text/javascript" src="../includes/js/jquery.svg.js"></script>
+	<script type="text/javascript" src="../includes/js/svg.js"></script>
+
+	<script type="text/javascript" src="../includes/js/build.js"></script>
+	<script type="text/javascript" src="../includes/js/interactions.js"></script>
+	<script type="text/javascript" src="../includes/js/jquery.event.drag-1.5.min.js"></script>
+	<script type="text/javascript" src="../includes/js/slide.js"></script>
+		<!-- Raphael -->
+    <script type="text/javascript" src="../includes/js/raphael-min.js"></script>
+    <script type="text/javascript" src="../includes/js/raphael.draggable.js"></script>
+    <script type="text/javascript" src="../includes/js/raphael.sketchpad.js"></script>
+		<!-- json -->
+	<script type="text/javascript" src="../includes/js/json2.min.js"></script>
+
+<!-- LINKS
+	http://ianli.com/sketchpad
+	http://raphaeljs.com
+	http://return-true.com/2010/04/jquery-pop-up-footer-version-2
+	
+	
+	  -->
+	  
+	<script type="text/javascript">
+			$(function() {
+		$( "#tabs" ).tabs({
+			event: 'mouseover',
+			effect: 'slide',
+});
+	});
+
+	</script>
+
+ 	<noscript>Joteee requires JavaScript to be enabled in your browser to work properly.</noscript>
+ 
+</head>
+<body>
+
+<!--
+			<p><button class="uibutton special" type="submit">Bar Graph</button>
+				<button class="uibutton confirm" type="submit">Pie Graph</button>
+				<button class="uibutton confirm" type="submit">Line Graph</button>
+				<button class="uibutton confirm" type="submit">Scatter Graph</button>
+	</p>
+			<p><a href="#" title="mythoughtjot">Whacha Got?</a></p> 
+-->
+
+<div class="row">
+    <div class="span5">
+    	  <h1>Whacha Got?</h1>
+
+			<h1>Tables</h1>
+		  <input type="text" style="width:36px; height:20px;font-size:14px; padding:2px;" class="valueinput" id="numRows" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Rows':this.value;" value="Rows"/>
+		  <input type="text" style="width:36px;height:20px;font-size:14px; padding:2px;"  class="valueinput" id="numColumns" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Cols':this.value;" value="Cols"/>
+          <input type="button" class="addtabletitle" onclick="createDynamicTable('table', document.getElementById('numRows').value, document.getElementById('numColumns').value)" value="New Table"/><br>
+          <input type="text" style="height:20px;font-size:14px; padding:2px;"  class="valueinput" id="addtabletitle"/>
+          <input type="button" class="addtabletitle" onclick="newTableTitle()" value="Add Title"/>
+          <input type="button"  class="addrowButton" onclick="addtablerow() " value="Add Row"/>
+          <input type="button"  class="addcolumnButton" onclick="addtablecolumn()" value="Add Column"/>
+       <!-- <h3>Create Graph:</h3>
+       <input type="button" class="addtabletitle" onclick="createGraph ('table', document.getElementById('tableTit').value, 'bar')" value="Bar Graph"/>  -->
+<br></br>
+      
+        <p><button class="uibutton special" type="submit">Bar Graph</button>
+				<button class="uibutton confirm" type="submit">Pie Graph</button>
+				<button class="uibutton confirm" type="submit">Line Graph</button>
+				<button class="uibutton confirm" type="submit">Scatter Graph</button></p>
+    </div>
+    <div class="span11">
+    	<div id="tabs">
+		<ul>
+			<li><a href="tabs-1">Table View</a></li>
+			<li><a href="tabs-2">Graph View</a></li>
+		</ul>
+    		<div id="ui-tabs-1"></div>
+    		<div id="ui-tabs-2"></div> 
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
